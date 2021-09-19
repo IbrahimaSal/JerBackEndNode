@@ -10,7 +10,7 @@ const MONGO_OPTIONS = {
     useNewUrlParser: true,
     socketTimeoutMS: 30000,
     keepAlive: true,
-    poolSize: 50,
+    // poolSize: 50,
     autoIndex: false,
     retryWrites: true
 };
@@ -35,8 +35,8 @@ const SERVER_TOKEN_ISSUER = process.env.SERVER_TOKEN_ISSUER || 'coolIssuer';
 const SERVER_TOKEN_SECRET = process.env.SERVER_TOKEN_SECRET || 'superencryptedsecret';
 
 const SERVER = {
-    // hostname: SERVER_HOSTNAME,
-    // port: SERVER_PORT,
+    hostname: SERVER_HOSTNAME,
+    port: SERVER_PORT,
     token: {
         expireTime: SERVER_TOKEN_EXPIRETIME,
         issuer: SERVER_TOKEN_ISSUER,

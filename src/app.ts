@@ -1,3 +1,10 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+/* eslint-disable @typescript-eslint/await-thenable */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable eqeqeq */
@@ -5,6 +12,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable no-console */
+// import http from 'http';
 import config from './config/config';
 import bodyParser from 'body-parser';
 import express from 'express';
@@ -20,23 +28,28 @@ const NAMESPACE = 'Server';
 const app = express();
 app.use(cors());
 
-/** Connect to Mongo */
+let ress='';
+
 mongoose
     .connect(config.mongo.url, config.mongo.options)
     .then((result) => {
-        logging.info(NAMESPACE, 'Mongo Connected');
+      ress='Mongo Connected';
+      logging.info(NAMESPACE, 'Mongo Connected');
     })
     .catch((error) => {
-        logging.error(NAMESPACE, error.message, error);
-    });
+      ress=error.message+'il y a eu probleme';
+      logging.error(NAMESPACE, error.message, error);
+});
+
+
 
 
 
 
 // const port = 3000;
 // app.use(cors());
-app.get('/', (req, res) => {
-  res.send('BackEnd de metiissecore');
+app.get('/', async (req, res) => {
+   await res.send('BackEnd de metiissecore:    '+config.mongo.url+' result '+ress);
 });
 // app.listen( port, () => {
 //     return console.log(`server is listening on ${port}`);
@@ -83,7 +96,8 @@ app.use((req, res, next) => {
   });
 });
 
-
+// const port=4500;
+// app.listen(config.server.port, () => logging.info(NAMESPACE, `Server is running on http://localhost:${config.server.port}`));
 
 
 module.exports.handler = serverless(app);

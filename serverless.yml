@@ -9,7 +9,7 @@ provider:
 package:
   exclude:    
     - src/**
-
+    - .env
 functions:
   app:
     handler: dist/app.handler

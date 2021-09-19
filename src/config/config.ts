@@ -25,7 +25,6 @@ const MONGO = {
     username: MONGO_USERNAME,
     options: MONGO_OPTIONS,
     url: `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}`
-    // url: 'mongodb+srv://Jer:JerMetiisseCore@jercluster.vn9ho.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 };
 
 const SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || 'localhost';

@@ -1,18 +1,6 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable prefer-arrow/prefer-arrow-functions */
-/* eslint-disable @typescript-eslint/await-thenable */
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable eqeqeq */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable no-console */
-// import http from 'http';
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+
 import config from './config/config';
 import bodyParser from 'body-parser';
 import express from 'express';
@@ -37,7 +25,7 @@ mongoose
       logging.info(NAMESPACE, 'Mongo Connected');
     })
     .catch((error) => {
-      ress=error.message+'il y a eu probleme';
+      ress=`${error.message} il y a eu probleme`;
       logging.error(NAMESPACE, error.message, error);
 });
 
@@ -78,7 +66,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
-  if (req.method == 'OPTIONS') {
+  if (req.method === 'OPTIONS') {
       res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
       return res.status(200).json({});
   }

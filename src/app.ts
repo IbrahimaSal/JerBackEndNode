@@ -48,8 +48,8 @@ mongoose
 
 // const port = 3000;
 // app.use(cors());
-app.get('/', async (req, res) => {
-   await res.send('BackEnd de metiissecore:    '+config.mongo.url+' result '+ress);
+app.get('/', (req, res) => {
+   res.send("TEST RESET HARD")
 });
 // app.listen( port, () => {
 //     return console.log(`server is listening on ${port}`);
@@ -96,8 +96,8 @@ app.use((req, res, next) => {
   });
 });
 
-// const port=4500;
-// app.listen(config.server.port, () => logging.info(NAMESPACE, `Server is running on http://localhost:${config.server.port}`));
+const port=4444;
+app.listen(config.server.port, () => logging.info(NAMESPACE, `Server is running on http://localhost:${config.server.port}`));
 
 
-module.exports.handler = serverless(app);
+// module.exports.handler = serverless(app);

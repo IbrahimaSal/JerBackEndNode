@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable object-shorthand */
@@ -29,7 +30,12 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 const register = (req: Request, res: Response, next: NextFunction) => {
     const UserToSave = {
         username: req.body.username,
-        password: req.body.password
+        email: req.body.email,
+        password: req.body.password,
+        firstname:"",
+        lastname:"",
+        status:"client",
+        expenses:"",
     };
     console.log(`User to save: ${JSON.stringify(UserToSave)}`);
     bcryptjs.hash(UserToSave.password, 10, (hashError, hash) => {
@@ -42,7 +48,12 @@ const register = (req: Request, res: Response, next: NextFunction) => {
         const _user = new User({
             _id: new mongoose.Types.ObjectId(),
             username: UserToSave.username,
-            password: hash
+            email:UserToSave.email,
+            password: hash,
+            firstname:UserToSave.firstname,
+            lastname:UserToSave.lastname,
+            status:UserToSave.status,
+            expenses:UserToSave.expenses,
         });
 
         return _user
@@ -62,8 +73,14 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const login = (req: Request, res: Response, next: NextFunction) => {
-    let { username, password } = req.body;
-    User.find({ username })
+    let { emailorusername, password } = req.body;
+    User.find({
+        $or: [{
+            email: req.body.emailorusername
+        }, {
+            username: req.body.emailorusername
+        }]
+     })
         .exec()
         .then((users) => {
             if (users.length !== 1) {

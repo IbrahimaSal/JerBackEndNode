@@ -5,6 +5,7 @@
 import mongoose, { Schema } from 'mongoose';
 import IUser from '../interfaces/user';
 
+
 const UserSchema: Schema = new Schema(
     {
         username: {
@@ -12,9 +13,26 @@ const UserSchema: Schema = new Schema(
             required: true,
             unique: true
         },
+        email: {
+            type: String,
+            required: true,
+            unique: true
+        },
         password: {
             type: String,
             required: true
+        },
+        firstname:{
+            type: String,
+        },
+        lastname:{
+            type: String,
+        },
+        status:{
+            type: String,
+        },
+        expenses:{
+            type:String,
         }
     },
     {
